@@ -1,0 +1,37 @@
+version: '4'
+
+services:
+
+  db-inventory:
+    container_name: db_inventory
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${INVENTORY_DB}
+      POSTGRES_USER: ${INVENTORY_USER}
+      POSTGRES_PASSWORD: ${INVENTORY_PASSWORD}
+    ports:
+      - "5431:5432"
+
+  db-products:
+    container_name: db_products
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${PRODUCTS_DB}
+      POSTGRES_USER: ${PRODUCTS_USER}
+      POSTGRES_PASSWORD: ${PRODUCTS_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  db-orders:
+    container_name: db_orders
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${ORDERS_DB}
+      MYSQL_USER: ${ORDERS_USER}
+      MYSQL_PASSWORD: ${ORDERS_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${ORDERS_ROOT_PASSWORD}
+    ports:
+      - "3307:3306"
